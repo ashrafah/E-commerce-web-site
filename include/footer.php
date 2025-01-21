@@ -21,10 +21,11 @@
         <div class="container">
             <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
               <div class="col mb-3">
-                <img src="../assets/Footer/footer-icon.png" alt="Online Galaxy" style="height: 200px;">
+                <img src="../assets/Footer/footer-icon.png" alt="Online Galaxy" style="height: 200px;">  //logo
                 <p class="text-body-secondary">© 2024</p>
               </div>
           
+              <!-- Address start -->
               <div class="col mb-3">
                 <h2 class="fw-bold fs-3">Online Galaxy</h2>
                 <h5>Got Question</h5>
@@ -36,9 +37,11 @@
                     <p class="lead">Maho.</p>
                 </div>
     
-    
               </div>
-          
+              <!-- address end -->
+
+
+              <!-- Custtomer care start -->
               <div class="col mb-3">
                 <h5 class="text-decoration-underline lea">Customer Care</h5>
                 <ul class="nav flex-column">
@@ -49,7 +52,10 @@
                   <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">CRM</a></li>
                 </ul>
               </div>
-          
+              <!-- customer care end -->
+
+
+              <!-- get know start -->
               <div class="col mb-3">
                 <h5 class="text-decoration-underline">Get Know to US</h5>
                 <ul class="nav flex-column">
@@ -58,7 +64,10 @@
                   <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Address</a></li>
                 </ul>
               </div>
-          
+              <!-- get know end -->
+
+
+              <!-- let us heip start -->
               <div class="col mb-3">
                 <h5 class="text-decoration-underline">Lets US  help YOU</h5>
                 <ul class="nav flex-column">
@@ -69,6 +78,9 @@
                   <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Privacy Policy</a></li>
                 </ul>
               </div>
+              <!-- let us help end -->
+
+
             </footer>
         </div>
 
