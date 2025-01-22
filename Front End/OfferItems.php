@@ -89,7 +89,7 @@ $resultItems = $conn->query($sqlItems);
             color: white;
             display: inline-block;
             color: white;
-            background-color: gray; 
+            background-color: ; 
             padding: 5px;
         }
 
@@ -127,13 +127,11 @@ $resultItems = $conn->query($sqlItems);
                 echo '</div>';
             }
         } else {
-            echo "No mobile phones found with matching prices.";
+            echo "No Offer Items found.";
         }
         ?>
     </div>
 </body>
 </html>
 
-<?php
-$conn->close();
-?>
+

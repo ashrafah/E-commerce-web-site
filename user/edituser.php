@@ -272,7 +272,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="right-rectangle">
     <h2>Edit User</h2>
 
-    <!-- Success Message Popup -->
+    <!-- Success Message Popup --> 
     <div id="successPopup">
         <p id="successMessage"></p>
         <button onclick="closePopup()">Close</button>
