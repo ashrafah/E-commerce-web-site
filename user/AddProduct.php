@@ -14,17 +14,15 @@ if ($conn->connect_error) {
 }
 
 // Fetch categories from the database
-// Fetch categories from the database
 $categories = [];
 $categoryQuery = "SELECT CID, Name FROM categories WHERE Name IN ('Mobile Phones', 'Mobile Accessories')";
 $result = $conn->query($categoryQuery);
 
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $categories[] = $row; // Store each category
+        $categories[] = $row;
     }
 }
-
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -32,26 +30,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $price = $_POST['price'];
     $qty = $_POST['qty'];
-    $oprice = isset($_POST['no_offer']) ? $price : $_POST['oprice']; // Set offer price
+    $oprice = isset($_POST['no_offer']) ? $price : $_POST['oprice'];
     $description = $_POST['description'];
     $cid = $_POST['cid'];
     $warranty = $_POST['warranty'];
     $sold = $_POST['sold'];
+
+    // Get current date
+    $currentDate = date('Y-m-d'); // Format as YYYY-MM-DD
 
     // Handle uploaded images
     $images = [];
     for ($i = 1; $i <= 5; $i++) {
         $imageField = "image$i";
         if (isset($_FILES[$imageField]) && $_FILES[$imageField]['error'] == 0) {
-            $images[] = file_get_contents($_FILES[$imageField]['tmp_name']); // Read image as binary data
+            $images[] = file_get_contents($_FILES[$imageField]['tmp_name']);
         } else {
-            $images[] = null; // Set null for optional images
+            $images[] = null;
         }
     }
 
     // Insert data into the database
-    $sql = "INSERT INTO items (Image_1, Image_2, Image_3, Image_4, Image_5, Name, Price, Qty, Description, CID, OPrice, Warranty, Sold)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO items (Image_1, Image_2, Image_3, Image_4, Image_5, Name, Price, Qty, Description, CID, OPrice, Warranty, Sold, Date)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
     if (!$stmt) {
@@ -60,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Bind parameters
     $stmt->bind_param(
-        'bbbbbsddsdsii',
+        'bbbbbsddsdsiss',
         $images[0],
         $images[1],
         $images[2],
@@ -73,7 +74,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $cid,
         $oprice,
         $warranty,
-        $sold
+        $sold,
+        $currentDate
     );
 
     // Send binary data for images
@@ -94,6 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 $conn->close();
 ?>
+
 
 
 

@@ -22,8 +22,8 @@ if ($resultCategory->num_rows > 0) {
     $categoryID = $category['CID']; // Get the CID for Mobile Phones
 }
 
-// Fetch items data from the items table for the selected category where Price = OPrice
-$sqlItems = "SELECT IID, Name, Price, OPrice, Image_1 FROM items WHERE CID = $categoryID AND Price = OPrice";
+// Fetch items data from the items table for the selected category
+$sqlItems = "SELECT IID, Name, Price, OPrice, Image_1 FROM items WHERE CID = $categoryID";
 $resultItems = $conn->query($sqlItems);
 ?>
 
@@ -61,23 +61,48 @@ $resultItems = $conn->query($sqlItems);
             text-align: center;
             box-sizing: border-box;
             overflow: hidden;
-            height: 350px; /* fixed height for the box */
+            height: ; /* fixed height for the box */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
         .category-box img {
-            width: 100%;
-            height: 200px; /* fixed height for the image */
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
             object-fit: cover; /* ensures the image is properly cropped */
             border-radius: 10px;
         }
         .category-name {
-            margin-top: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
             font-weight: bold;
             color: #fff;
-            font-size: 1.2em;
+            font-size: 12px;
+            align: center;
         }
+
+        .Price {
+            margin-top: 10px;
+            text-decoration: line-through; 
+            text-decoration-color: red;
+        }
+
+        .offer-price {
+            margin-bottom: 10px;
+        }
+
+        .Price, .offer-price {
+            color: white;
+            display: inline-block;
+            color: white;
+            background-color: gray; 
+            padding: 5px;
+        }
+        
         @media screen and (max-width: 768px) {
             .category-box {
                 width: 45%;
@@ -101,11 +126,13 @@ $resultItems = $conn->query($sqlItems);
                 $image = base64_encode($row['Image_1']);
                 $itemName = $row['Name'];
                 $price = $row['Price'];
+                $oprice = $row['OPrice'];
 
                 // Display the item inside a gradient rectangle
                 echo '<div class="category-box">';
                 echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $itemName . '">';
                 echo '<div class="category-name">' . $itemName . '</div>';
+                echo '<div class="offer-price">' . "Rs. ". $oprice . ".00". '</div>';
                 echo '</div>';
             }
         } else {
