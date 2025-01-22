@@ -28,8 +28,9 @@ if (isset($_GET['query'])) {
 
 
 <!-- navi bar -->
-
-
+<?php
+    include 'nav.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
