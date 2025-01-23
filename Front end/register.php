@@ -1,3 +1,48 @@
+<?php
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "shop";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Insert data into the database
+    $sql = "INSERT INTO `users` (`FirstName`, `LastName`, `MobileNo.`, `UserName`, `Email`, `Password`, `P.Address`, `P.Town`, `S.Address`, `S.Town`)
+            VALUES ('$firstName', '$lastName', '$mobileNo', '$username', '$email', '$password', '$permanentAddress', '$permanentTown', '$shippingAddress', '$shippingTown')";
+
+    if ($conn->query($sql) === TRUE) {
+        $successMessage = "User added successfully!";
+        $isSuccess = true;
+    } else {
+        $successMessage = "Error: " . $sql . "<br>" . $conn->error;
+        $isSuccess = false;
+    }
+
+    $conn->close();
+}
+?>
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,16 +77,16 @@
                     <div class="row">
                         <div class="col-md-6 my-3">
                             <label for="firstName" class="form-label fw-bold">First Name</label>
-                            <input type="text" class="form-control rounded-5" id="firstName" placeholder="First Name">
+                            <input type="text" class="form-control rounded-5" name="firstName" id="firstName" placeholder="First Name">
                         </div>
                         <div class="col-md-6 my-3">
                             <label for="lastName" class="form-label fw-bold">Last Name</label>
-                            <input type="text" class="form-control rounded-5" id="lastName" placeholder="Last Name">
+                            <input type="text" class="form-control rounded-5" name="lastName" id="lastName" placeholder="Last Name">
                         </div>
                     </div>
                     <div class="my-3">
                         <label for="email" class="form-label fw-bold">Email</label>
-                        <input type="email" class="form-control rounded-5" id="email" placeholder="Enter your email">
+                        <input type="email" class="form-control rounded-5" name="email" id="email" placeholder="Enter your email">
                     </div>
                     <div class="row">
                         <div class="col-md-6 my-3">
