@@ -161,6 +161,29 @@ $result = $conn->query($sql);
             z-index: 1000;
         }
 
+        .popup-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .popup-buttons button {
+            margin: 0 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup-buttons .yes {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .popup-buttons .no {
+            background-color: #dc3545;
+            color: white;
+        }
+
         #overlay {
             position: fixed;
             top: 0;
@@ -173,14 +196,33 @@ $result = $conn->query($sql);
         }
     </style>
     <script>
+
         function confirmDelete(paymentId) {
-            if (confirm("Are you sure you want to delete this payment?")) {
-                window.location.href = `Earnings.php?id=${paymentId}`;
-            }
+            document.getElementById('popup-text').innerText = `Do you really want to delete "${paymentId}" details?`;
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('confirm-yes').onclick = function () {
+                window.location.href = `Earnings.php?id=${paymentId}`; // Redirect to the same page with the user ID to trigger deletion
+            };
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
         }
     </script>
 </head>
 <body>
+
+<div id="overlay"></div>
+<div class="popup" id="popup">
+    <p id="popup-text"></p>
+    <div class="popup-buttons">
+        <button class="yes" id="confirm-yes">Yes</button>
+        <button class="no" onclick="closePopup()">No</button>
+    </div>
+</div>
+
 <div class="left-rectangle">
     <h2>Dashboard</h2>
     <div class="nav-links">
@@ -221,10 +263,11 @@ $result = $conn->query($sql);
                     echo "<td>" . $row['Quantity'] . "</td>";
                     echo "<td>" . $row['Total'] . "</td>";
                     echo "<td>" . $row['Date'] . "</td>";
-                    echo "<td class='action-buttons'>";
+                    echo "<td class='action-buttons'>"; 
                     echo "<a href='EditEarnings.php?id=" . $row['PID'] . "'><img src='img/edit.png' alt='Edit'></a>";
-                    echo "<a href='#' onclick='confirmDelete(\"" . $row['PID'] . ")'><img src='img/delete.png' alt='Delete'></a>";
+                    echo "<a href='#' onclick='confirmDelete(\"" . $row['PID'] . "\")'><img src='img/delete.png' alt='Delete'></a>";
                     echo "</td>";
+
                     echo "</tr>";
                 }
             } else {

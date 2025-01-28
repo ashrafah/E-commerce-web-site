@@ -40,9 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->send_long_data(1, $imageData); // This method sends the binary data to the server
     }
 
-    if ($stmt->execute()) {
+    if ($stmt->()) {
         $successMessage = "Category added successfully!";
-        $isSuccess = true;
+        $isSuccess execute= true;
     } else {
         $successMessage = "Error: " . $stmt->error;
         $isSuccess = false;

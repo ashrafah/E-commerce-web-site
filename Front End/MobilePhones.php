@@ -12,14 +12,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Select the CID for 'Mobile Phones' from categories table
+// Select the CID for 'Mobile Accessories' from categories table
 $sqlCategory = "SELECT CID FROM categories WHERE Name = 'Mobile Phones'";
 $resultCategory = $conn->query($sqlCategory);
 
 $categoryID = null;
 if ($resultCategory->num_rows > 0) {
     $category = $resultCategory->fetch_assoc();
-    $categoryID = $category['CID']; // Get the CID for Mobile Phones
+    $categoryID = $category['CID']; // Get the CID for Mobile Accessories
 }
 
 // Fetch items data from the items table for the selected category
@@ -32,7 +32,7 @@ $resultItems = $conn->query($sqlItems);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Phones</title>
+    <title>Mobile Accessories</title>
     <style>
         body {
             background-color: #F3EFF7;
@@ -85,24 +85,16 @@ $resultItems = $conn->query($sqlItems);
             align: center;
         }
 
-        .Price {
-            margin-top: 10px;
-            text-decoration: line-through; 
-            text-decoration-color: red;
-        }
 
         .offer-price {
             margin-bottom: 10px;
-        }
-
-        .Price, .offer-price {
             color: white;
             display: inline-block;
             color: white;
             background-color: gray; 
             padding: 5px;
         }
-        
+
         @media screen and (max-width: 768px) {
             .category-box {
                 width: 45%;
@@ -116,7 +108,7 @@ $resultItems = $conn->query($sqlItems);
     </style>
 </head>
 <body>
-    <h1>Mobile Phones</h1>
+    <h1>Mobile Accessories</h1>
     <div class="container">
         <?php
         if ($resultItems->num_rows > 0) {
@@ -127,16 +119,17 @@ $resultItems = $conn->query($sqlItems);
                 $itemName = $row['Name'];
                 $price = $row['Price'];
                 $oprice = $row['OPrice'];
+                $iid = $row['IID']; // Get the product ID
 
                 // Display the item inside a gradient rectangle
-                echo '<div class="category-box">';
+                echo '<a href="Product.php?id=' . $iid . '" class="category-box" style="text-decoration: none;">';
                 echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $itemName . '">';
                 echo '<div class="category-name">' . $itemName . '</div>';
                 echo '<div class="offer-price">' . "Rs. ". $oprice . ".00". '</div>';
-                echo '</div>';
+                echo '</a>';
             }
         } else {
-            echo "No mobile phones found with matching prices.";
+            echo "No mobile Accessories found.";
         }
         ?>
     </div>

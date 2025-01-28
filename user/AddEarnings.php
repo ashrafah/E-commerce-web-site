@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $uprice = $_POST['uprice'];
     $qty = $_POST['qty'];
-    $type = "Cash";
+    $type = "type";
     $total = $uprice * $qty;
     $date = date("Y-m-d");
 
@@ -225,6 +225,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="uprice">Unit Price:</label>
             <input type="number" id="uprice" name="uprice" required>
         </div>
+
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <input type="text" id="type" name="type" required>
+        </div>
+
         <div class="form-group">
             <label for="qty">Quantity:</label>
             <input type="number" id="qty" name="qty" required>

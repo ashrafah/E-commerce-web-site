@@ -119,16 +119,17 @@ $resultItems = $conn->query($sqlItems);
                 $itemName = $row['Name'];
                 $price = $row['Price'];
                 $oprice = $row['OPrice'];
+                $iid = $row['IID']; // Get the product ID
 
                 // Display the item inside a gradient rectangle
-                echo '<div class="category-box">';
+                echo '<a href="Product.php?id=' . $iid . '" class="category-box" style="text-decoration: none;">';
                 echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $itemName . '">';
                 echo '<div class="category-name">' . $itemName . '</div>';
                 echo '<div class="offer-price">' . "Rs. ". $oprice . ".00". '</div>';
-                echo '</div>';
+                echo '</a>';
             }
         } else {
-            echo "No mobile phones found with matching prices.";
+            echo "No mobile Accessories found.";
         }
         ?>
     </div>

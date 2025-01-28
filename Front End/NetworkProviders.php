@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch categories data from the database
-$sql = "SELECT * FROM categories";
+$sql = "SELECT * FROM networkproviders";
 $result = $conn->query($sql);
 ?>
 
@@ -43,36 +43,35 @@ $result = $conn->query($sql);
             box-sizing: border-box;
             overflow: hidden;
         }
-        .category-box {
-            display: inline-block;
+        .networkproviders-box {
+            display: inline-flex; /* Changed to flex for alignment */
+            flex-direction: column; /* Ensures content stacks vertically */
+            justify-content: center; /* Vertical alignment */
+            align-items: center; /* Horizontal alignment */
             width: 30%;
-            margin: 10px;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
             background: linear-gradient(to bottom, #9B7EBD, #3B1E54);
             border-radius: 10px;
             padding: 10px;
             text-align: center;
             box-sizing: border-box;
             overflow: hidden;
-            height: 350px; /* fixed height for the box */
+            align: center;
         }
-        .category-box img {
-            width: 100%;
-            height: 250px; /* fixed height for the image */
-            object-fit: cover; /* ensures the image is properly cropped */
+        .networkproviders-box img {
+           /* Fixed height for the image */
+            object-fit: cover; /* Ensures the image is properly cropped */
             border-radius: 10px;
         }
-        .category-name {
-            margin-top: 30px;
-            font-weight: bold;
-            color: #fff;
-        }
         @media screen and (max-width: 768px) {
-            .category-box {
+            .networkproviders-box {
                 width: 45%;
             }
         }
         @media screen and (max-width: 480px) {
-            .category-box {
+            .networkproviders-box {
                 width: 100%;
             }
         }
@@ -84,16 +83,15 @@ $result = $conn->query($sql);
         <?php
         if ($result->num_rows > 0) {
             // Output data of each row
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 // Convert BLOB to base64 encoding for displaying the image
                 $image = base64_encode($row['Image']);
-                $categoryName = $row['Name'];
+                $networkproviders = $row['Name'];
                 // Remove spaces from category name (no encoding needed)
-                $sanitizedCategoryName = str_replace(' ', '', $categoryName);
-                echo '<a href="' . $sanitizedCategoryName . '.php">';
-                echo '<div class="category-box">';
+                $sanitizednetworkproviderName = str_replace(' ', '', $networkproviders);
+                echo '<a href="' . $sanitizednetworkproviderName . '.php">';
+                echo '<div class="networkproviders-box">';
                 echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $row['Name'] . '">';
-                echo '<div class="category-name">' . $row['Name'] . '</div>';
                 echo '</div>';
                 echo '</a>';
             }
