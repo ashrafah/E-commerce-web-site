@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayHere Payment Integration</title>
+    <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
+</head>
+<body>
+    <h2>Pay for Your Order</h2>
+
+    <!-- Payment Button -->
+    <button id="payhere-payment-button">Pay with PayHere</button>
+
+    <script>
+        document.getElementById("payhere-payment-button").onclick = function() {
+            var payment = {
+                sandbox: true,  // Set to false in production
+                merchant_id: "4OVxgIYT94S4JFnJHCYqVI3LE", // Your App ID
+                return_url: "https://yourdomain.com/payment-success", // Success URL
+                cancel_url: "https://yourdomain.com/payment-cancel", // Cancel URL
+                notify_url: "https://yourdomain.com/payment-notify", // Notify URL
+
+                order_id: "12345", // Unique Order ID (dynamically generated)
+                items: "E-commerce Products", // Description of the order
+                amount: 1000.00, // Total amount to be paid
+                currency: "LKR", // Currency (Sri Lankan Rupee)
+                
+                // Customer details
+                first_name: "John",
+                last_name: "Doe",
+                email: "johndoe@example.com",
+                phone: "0112345678",
+                address: "123 Street Name",
+                city: "Colombo",
+                country: "Sri Lanka"
+            };
+
+            // Initiate PayHere Checkout
+            payhere.checkout(payment);
+        };
+    </script>
+</body>
+</html>
