@@ -17,89 +17,51 @@ $sql = "SELECT * FROM networkproviders";
 $result = $conn->query($sql);
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories</title>
-    <style>
-        body {
-            background-color: #F3EFF7;
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .container {
-            margin: 50px 100px;
-            background-color: #F3EFF7;
-            border-radius: 10px;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-        .networkproviders-box {
-            display: inline-flex; /* Changed to flex for alignment */
-            flex-direction: column; /* Ensures content stacks vertically */
-            justify-content: center; /* Vertical alignment */
-            align-items: center; /* Horizontal alignment */
-            width: 30%;
-            margin-top: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
-            background: linear-gradient(to bottom, #9B7EBD, #3B1E54);
-            border-radius: 10px;
-            padding: 10px;
-            text-align: center;
-            box-sizing: border-box;
-            overflow: hidden;
-            align: center;
-        }
-        .networkproviders-box img {
-           /* Fixed height for the image */
-            object-fit: cover; /* Ensures the image is properly cropped */
-            border-radius: 10px;
-        }
-        @media screen and (max-width: 768px) {
-            .networkproviders-box {
-                width: 45%;
-            }
-        }
-        @media screen and (max-width: 480px) {
-            .networkproviders-box {
-                width: 100%;
-            }
-        }
-    </style>
+    <title>Network Providers</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Category</h1>
+<body class="bg-light">
+    <h1 class="text-center my-4 text-dark">Network Providers</h1>
+    
     <div class="container">
-        <?php
-        if ($result->num_rows > 0) {
-            // Output data of each row
-            while ($row = $result->fetch_assoc()) {
-                // Convert BLOB to base64 encoding for displaying the image
-                $image = base64_encode($row['Image']);
-                $networkproviders = $row['Name'];
-                // Remove spaces from category name (no encoding needed)
-                $sanitizednetworkproviderName = str_replace(' ', '', $networkproviders);
-                echo '<a href="' . $sanitizednetworkproviderName . '.php">';
-                echo '<div class="networkproviders-box">';
-                echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $row['Name'] . '">';
-                echo '</div>';
-                echo '</a>';
+        <div class="row">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    // Convert BLOB image to base64 encoding for displaying the image
+                    $image = base64_encode($row['Image']);
+                    $networkProvider = $row['Name'];
+                    $sanitizedName = str_replace(' ', '', $networkProvider);
+
+                    // Display each provider inside a Bootstrap card
+                    echo '<div class="col-md-4 col-sm-6 mb-4">';
+                    echo '<a href="' . $sanitizedName . '.php" class="text-decoration-none">';
+                    echo '<div class="card h-100 text-center text-white" style="background: linear-gradient(to bottom, #9B7EBD, #3B1E54);">';
+                    echo '<div class="p-3">'; // Padding around the image
+                    echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $networkProvider . '" class="card-img-top img-fluid" style="height: 250px; object-fit: cover; border-radius: 10px;">';
+                    echo '</div>';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">' . $networkProvider . '</h5>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</a>';
+                    echo '</div>';
+                }
+            } else {
+                echo "<p class='text-center'>No Network Providers found.</p>";
             }
-        } else {
-            echo "No categories found.";
-        }
-        ?>
+            ?>
+        </div>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 

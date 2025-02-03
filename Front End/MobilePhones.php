@@ -19,7 +19,7 @@ $resultCategory = $conn->query($sqlCategory);
 $categoryID = null;
 if ($resultCategory->num_rows > 0) {
     $category = $resultCategory->fetch_assoc();
-    $categoryID = $category['CID']; // Get the CID for Mobile Accessories
+    $categoryID = $category['CID']; // Get the CID for Mobile Phones
 }
 
 // Fetch items data from the items table for the selected category
@@ -32,107 +32,49 @@ $resultItems = $conn->query($sqlItems);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Accessories</title>
-    <style>
-        body {
-            background-color: #F3EFF7;
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .container {
-            margin: 50px 100px;
-            background-color: #F3EFF7;
-            border-radius: 10px;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow: hidden;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .category-box {
-            width: 23%; /* width of each box */
-            margin: 10px;
-            background: linear-gradient(to bottom, #9B7EBD, #3B1E54);
-            border-radius: 10px;
-            text-align: center;
-            box-sizing: border-box;
-            overflow: hidden;
-            height: ; /* fixed height for the box */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .category-box img {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
-            object-fit: cover; /* ensures the image is properly cropped */
-            border-radius: 10px;
-        }
-        .category-name {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
-            font-weight: bold;
-            color: #fff;
-            font-size: 12px;
-            align: center;
-        }
-
-
-        .offer-price {
-            margin-bottom: 10px;
-            color: white;
-            display: inline-block;
-            color: white;
-            background-color: gray; 
-            padding: 5px;
-        }
-
-        @media screen and (max-width: 768px) {
-            .category-box {
-                width: 45%;
-            }
-        }
-        @media screen and (max-width: 480px) {
-            .category-box {
-                width: 100%;
-            }
-        }
-    </style>
+    <title>Mobile Phones</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Mobile Accessories</h1>
+<body class="bg-light">
+    <h1 class="text-center my-4 text-dark">Mobile Phones</h1>
+    
     <div class="container">
-        <?php
-        if ($resultItems->num_rows > 0) {
-            // Output data of each item
-            while($row = $resultItems->fetch_assoc()) {
-                // Convert BLOB image to base64 encoding for displaying the image
-                $image = base64_encode($row['Image_1']);
-                $itemName = $row['Name'];
-                $price = $row['Price'];
-                $oprice = $row['OPrice'];
-                $iid = $row['IID']; // Get the product ID
+        <div class="row">
+            <?php
+            if ($resultItems->num_rows > 0) {
+                while ($row = $resultItems->fetch_assoc()) {
+                    // Convert BLOB image to base64 encoding for displaying the image
+                    $image = base64_encode($row['Image_1']);
+                    $itemName = $row['Name'];
+                    $price = $row['Price'];
+                    $oprice = $row['OPrice'];
+                    $iid = $row['IID']; // Get the product ID
 
-                // Display the item inside a gradient rectangle
-                echo '<a href="Product.php?id=' . $iid . '" class="category-box" style="text-decoration: none;">';
-                echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $itemName . '">';
-                echo '<div class="category-name">' . $itemName . '</div>';
-                echo '<div class="offer-price">' . "Rs. ". $oprice . ".00". '</div>';
-                echo '</a>';
+                    // Display items inside a Bootstrap card
+                    echo '<div class="col-md-3 col-sm-6 mb-4">';
+                    echo '<a href="Product.php?id=' . $iid . '" class="text-decoration-none">';
+                    echo '<div class="card h-100 text-center text-white" style="background: linear-gradient(to bottom, #9B7EBD, #3B1E54);">';
+                    echo '<div class="p-3">'; // Padding around the image
+                    echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $itemName . '" class="card-img-top img-fluid" style="height: 250px; object-fit: cover; border-radius: 10px;">';
+                    echo '</div>';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">' . $itemName . '</h5>';
+                    echo '<p class="fw-bold">Rs. ' . number_format($oprice, 2) . '</p>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</a>';
+                    echo '</div>';
+                }
+            } else {
+                echo "<p class='text-center'>No Mobile Phones found.</p>";
             }
-        } else {
-            echo "No mobile Accessories found.";
-        }
-        ?>
+            ?>
+        </div>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 

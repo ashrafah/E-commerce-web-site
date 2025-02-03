@@ -17,91 +17,70 @@ $sql = "SELECT * FROM categories";
 $result = $conn->query($sql);
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #F3EFF7;
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .container {
-            margin: 50px 100px;
-            background-color: #F3EFF7;
-            border-radius: 10px;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-        .category-box {
-            display: inline-block;
-            width: 30%;
-            margin: 10px;
+        /* Styling the card */
+        .card {
             background: linear-gradient(to bottom, #9B7EBD, #3B1E54);
             border-radius: 10px;
-            padding: 10px;
-            text-align: center;
-            box-sizing: border-box;
-            overflow: hidden;
-            height: 350px; /* fixed height for the box */
+            overflow: hidden; /* Ensures everything stays inside the card */
+            padding: 10px; /* Creates spacing inside the card */
         }
-        .category-box img {
+
+        /* Ensuring spacing around the image without adding a background */
+        .category-img {
             width: 100%;
-            height: 250px; /* fixed height for the image */
-            object-fit: cover; /* ensures the image is properly cropped */
-            border-radius: 10px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px; /* Keeps rounded corners */
+            padding: 10px; /* Adds spacing without affecting layout */
+            background: transparent; /* Ensures transparency */
         }
-        .category-name {
-            margin-top: 30px;
-            font-weight: bold;
-            color: #fff;
-        }
-        @media screen and (max-width: 768px) {
-            .category-box {
-                width: 45%;
-            }
-        }
-        @media screen and (max-width: 480px) {
-            .category-box {
-                width: 100%;
-            }
+
+        .card-body {
+            text-align: center;
+            color: white;
         }
     </style>
 </head>
-<body>
-    <h1>Category</h1>
+<body class="bg-light">
+    <h1 class="text-center my-4 text-dark">Category</h1>
     <div class="container">
-        <?php
-        if ($result->num_rows > 0) {
-            // Output data of each row
-            while($row = $result->fetch_assoc()) {
-                // Convert BLOB to base64 encoding for displaying the image
-                $image = base64_encode($row['Image']);
-                $categoryName = $row['Name'];
-                // Remove spaces from category name (no encoding needed)
-                $sanitizedCategoryName = str_replace(' ', '', $categoryName);
-                echo '<a href="' . $sanitizedCategoryName . '.php">';
-                echo '<div class="category-box">';
-                echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $row['Name'] . '">';
-                echo '<div class="category-name">' . $row['Name'] . '</div>';
-                echo '</div>';
-                echo '</a>';
+        <div class="row">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $image = base64_encode($row['Image']);
+                    $categoryName = $row['Name'];
+                    $sanitizedCategoryName = str_replace(' ', '', $categoryName);
+                    
+                    echo '<div class="col-md-4 col-sm-6 mb-4">';
+                    echo '<a href="' . $sanitizedCategoryName . '.php" class="text-decoration-none">';
+                    echo '<div class="card h-100">';
+                    echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $row['Name'] . '" class="category-img">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">' . $row['Name'] . '</h5>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</a>';
+                    echo '</div>';
+                }
+            } else {
+                echo "No categories found.";
             }
-        } else {
-            echo "No categories found.";
-        }
-        ?>
+            ?>
+        </div>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 

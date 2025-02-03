@@ -12,8 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
-// Fetch items data from the items table for the selected category where Price NotEqualTo OPrice
+// Fetch items data where Price is not equal to OPrice (Offer Price)
 $sqlItems = "SELECT IID, Name, Price, OPrice, Image_1 FROM items WHERE Price != OPrice";
 $resultItems = $conn->query($sqlItems);
 ?>
@@ -24,114 +23,52 @@ $resultItems = $conn->query($sqlItems);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Offer Items</title>
-    <style>
-        body {
-            background-color: #F3EFF7;
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .container {
-            margin: 50px 100px;
-            background-color: #F3EFF7;
-            border-radius: 10px;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow: hidden;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .category-box {
-            width: 23%; /* width of each box */
-            margin: 10px;
-            background: linear-gradient(to bottom, #9B7EBD, #3B1E54);
-            border-radius: 10px;
-            text-align: center;
-            box-sizing: border-box;
-            overflow: hidden;
-            height: ; /* fixed height for the box */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .category-box img {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
-            object-fit: cover; /* ensures the image is properly cropped */
-            border-radius: 10px;
-        }
-        .category-name {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
-            font-weight: bold;
-            color: #fff;
-            font-size: 12px;
-        }
-  
-        .Price {
-            margin-top: 10px;
-            text-decoration: line-through; 
-            text-decoration-color: red;
-        }
-
-        .offer-price {
-            margin-bottom: 10px;
-        }
-
-        .Price, .offer-price {
-            color: white;
-            display: inline-block;
-            color: white;
-            background-color: ; 
-            padding: 5px;
-        }
-
-        @media screen and (max-width: 768px) {
-            .category-box {
-                width: 45%;
-            }
-        }
-        @media screen and (max-width: 480px) {
-            .category-box {
-                width: 100%;
-            }
-        }
-    </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Offer Items</h1>
+<body class="bg-light">
+    <h1 class="text-center my-4 text-dark">Offer Items</h1>
+    
     <div class="container">
-        <?php
-        if ($resultItems->num_rows > 0) {
-            // Output data of each item
-            while($row = $resultItems->fetch_assoc()) {
-                // Convert BLOB image to base64 encoding for displaying the image
-                $image = base64_encode($row['Image_1']);
-                $itemName = $row['Name'];
-                $price = $row['Price'];
-                $oprice = $row['OPrice'];
+        <div class="row">
+            <?php
+            if ($resultItems->num_rows > 0) {
+                while ($row = $resultItems->fetch_assoc()) {
+                    // Convert BLOB image to base64 encoding for displaying the image
+                    $image = base64_encode($row['Image_1']);
+                    $itemName = $row['Name'];
+                    $price = $row['Price'];
+                    $oprice = $row['OPrice'];
+                    $iid = $row['IID']; // ✅ Defined correctly
 
-                // Display the item inside a gradient rectangle
-                echo '<div class="category-box">';
-                echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $itemName . '">';
-                echo '<div class="category-name">' . $itemName . '</div>';
-                echo '<div class="Price">' ."Rs. ". $price .".00". '</div>';
-                echo '<div class="offer-price">' . "Rs. ". $oprice . ".00". '</div>';
-                echo '</div>';
+                    // Display each item inside a Bootstrap card
+                    echo '<div class="col-md-4 col-sm-6 mb-4">';
+                    echo '<a href="Product.php?id=' . $iid . '" class="text-decoration-none">';
+                    echo '<div class="card h-100 text-center text-white" style="background: linear-gradient(to bottom, #9B7EBD, #3B1E54);">';
+                    echo '<div class="p-3">'; // Padding around the image
+                    echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $itemName . '" class="card-img-top img-fluid" style="height: 250px; object-fit: cover; border-radius: 10px;">';
+                    echo '</div>';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">' . $itemName . '</h5>';
+                    echo '<p class="text-decoration-line-through text-danger fw-bold">Rs. ' . number_format($price, 2) . '</p>';
+                    echo '<p class="text-white fw-bold bg-success p-2 d-inline-block rounded">Now: Rs. ' . number_format($oprice, 2) . '</p>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</a>';
+                    echo '</div>';
+                }
+            } else {
+                echo "<p class='text-center'>No Offer Items found.</p>";
             }
-        } else {
-            echo "No Offer Items found.";
-        }
-        ?>
+            ?>
+        </div>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
-
+<?php
+$conn->close();
+?>

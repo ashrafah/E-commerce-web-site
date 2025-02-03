@@ -12,6 +12,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$resultItems = null; // Initialize resultItems
+
 if (isset($_GET['query'])) {
     $search = htmlspecialchars($_GET['query']); // Sanitize the input
 
@@ -22,15 +24,10 @@ if (isset($_GET['query'])) {
     $stmt->execute();
     $resultItems = $stmt->get_result();
 }
-
 ?>
 
-
-
-<!-- navi bar -->
-<?php
-    include 'nav.php';
-?>
+<!-- Navbar -->
+<?php include 'nav.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,118 +35,45 @@ if (isset($_GET['query'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Result</title>
-    <style>
-        body {
-            background-color: #F3EFF7;
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .container {
-            margin: 50px 100px;
-            background-color: #F3EFF7;
-            border-radius: 10px;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow: hidden;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .category-box {
-            width: 23%; /* width of each box */
-            margin: 10px;
-            background: linear-gradient(to bottom, #9B7EBD, #3B1E54);
-            border-radius: 10px;
-            text-align: center;
-            box-sizing: border-box;
-            overflow: hidden;
-            height: ; /* fixed height for the box */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .category-box img {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
-            object-fit: cover; /* ensures the image is properly cropped */
-            border-radius: 10px;
-        }
-        .category-name {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
-            font-weight: bold;
-            color: #fff;
-            font-size: 12px;
-            align: center;
-        }
-
-        .Price {
-            margin-top: 10px;
-            text-decoration: line-through; 
-            text-decoration-color: red;
-        }
-
-        .offer-price {
-            margin-bottom: 10px;
-        }
-
-        .Price, .offer-price {
-            color: white;
-            display: inline-block;
-            color: white;
-            background-color: gray; 
-            padding: 5px;
-        }
-        
-        @media screen and (max-width: 768px) {
-            .category-box {
-                width: 45%;
-            }
-        }
-        @media screen and (max-width: 480px) {
-            .category-box {
-                width: 100%;
-            }
-        }
-    </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Search Result</h1>
+<body class="bg-light">
+    
+    <h1 class="text-center my-4 text-dark">Search Results</h1>
+
     <div class="container">
+        <div class="row">
+            <?php
+            if ($resultItems && $resultItems->num_rows > 0) {
+                while ($row = $resultItems->fetch_assoc()) {
+                    // Convert BLOB image to base64 encoding for displaying the image
+                    $image = base64_encode($row['Image_1']);
+                    $itemName = $row['Name'];
+                    $oprice = $row['OPrice'];
 
-    </body>
-</html>
-
-        <?php
-        if ($resultItems->num_rows > 0) {
-            // Output data of each item
-            while($row = $resultItems->fetch_assoc()) {
-                // Convert BLOB image to base64 encoding for displaying the image
-                $image = base64_encode($row['Image_1']);
-                $itemName = $row['Name'];
-                $oprice = $row['OPrice'];
-
-                // Display the item inside a gradient rectangle
-                echo '<div class="category-box">';
-                echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $itemName . '">';
-                echo '<div class="category-name">' . $itemName . '</div>';
-                echo '<div class="offer-price">' . "Rs. ". $oprice . ".00". '</div>';
-                echo '</div>';
+                    // Display each search result inside a Bootstrap card
+                    echo '<div class="col-md-4 col-sm-6 mb-4">';
+                    echo '<div class="card h-100 text-center text-white" style="background: linear-gradient(to bottom, #9B7EBD, #3B1E54);">';
+                    echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $itemName . '" class="card-img-top img-fluid" style="height: 250px; object-fit: cover; border-radius: 10px;">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">' . $itemName . '</h5>';
+                    echo '<p class="text-white fw-bold bg-success p-2 d-inline-block rounded">Rs. ' . number_format($oprice, 2) . '</p>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+            } else {
+                echo "<p class='text-center'>No items found matching your search.</p>";
             }
-        } else {
-            echo "No mobile phones found with matching prices.";
-        }
-        ?>
+            ?>
+        </div>
     </div>
 
-
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
 
 <?php
 $conn->close();
