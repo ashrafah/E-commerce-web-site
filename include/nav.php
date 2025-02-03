@@ -8,63 +8,61 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
   <!-- Custom Css file -->
+  <link rel="stylesheet" href="./nav-style.css">
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 
 
-  *{
-      font-family: poppins ,sans-serif;
-      margin: 0;
-      padding: 0;
-  }
+*{
+    font-family: poppins ,sans-serif;
+}
 
-  .navbar-custom {
+.navbar-custom {
     background-color: #3B1E54; /* Purple bar at the top */
     color: white;
     font-size: 11px;
-  }
-  .navbar-custom a{
+}
+.navbar-custom a{
     text-decoration: none !important;
-  }
-  .navbar-search {
+}
+.navbar-search {
     background-color: #b19cd9; /* Light purple for the main area */
-  }
-  .navbar-search input {
+}
+.navbar-search input {
     border-radius: 20px;
-  }
-  .navbar-search button{
+}
+.navbar-search button{
     border-radius: 20px;
     background-color: #fff;
-  }
-  .navbar-search button:hover{
-    background-color: #D4BEE4;; 
-  }
-  .navbar {
+}
+.navbar-search button:hover{
+    background-color: #D4BEE4;;
+}
+.navbar {
     background-color: #D4BEE4;
     height: 40px;
   }
-  .navbar-nav a {
+.navbar-nav a {
     color: black;
     font-weight: 450;
-  }
-  .navbar-nav a:hover{
+}
+.navbar-nav a:hover{
     color: #9B7EBD;
     font-weight: 450;
     text-decoration: underline;
-  }
+}
 
 
 
-  /* ===== footer ====== */
-  .footer-primary{
+/* ===== footer ====== */
+.footer-primary{
     background-color: #D4BEE4;
-  }
-</style>
+}
+  </style>
 
 </head>
-
 <body>
   <!-- nav bar start -->
   
@@ -73,7 +71,7 @@
     <div class="container d-flex justify-content-between">
       <span class="fw-bold">Dream in Touch</span>
       <span>
-        <i class="bi bi-telephone"></i> <a href="CantactUs.php" class="text-white">+94 77 9197191 </a>
+        <i class="bi bi-telephone"></i> <a href="#" class="text-white">+94 77 9197191 </a>
         <span>|</span>
         <i class="bi bi-geo-alt"></i> <a href="#" class="text-white">Location</a>
       </span>
@@ -84,7 +82,8 @@
 
 
   <!-- main nav bar start -->
-  <div class="navbar-search py-3 sticky-top">
+  <div class="sticky-top">
+  <div class="navbar-search py-3">
     <div class="container d-flex align-items-center justify-content-between">
       <!-- Logo -->
       <div class="d-flex align-items-center logo">
@@ -96,12 +95,10 @@
         <div class="row">
           <div class="col-12 col-md-8 col-lg-6 mx-auto my-2">
             <div class="input-group">
-              <form action="SearchResult.php" method="GET" class="input-group">
-              <input type="text" class="form-control" name="query" placeholder="Search...">
-              <button class="btn" type="submit">
-              <img src="../assets/nav-bar-icons/search.svg" alt="Search">
+              <input type="text" class="form-control" placeholder="Search...">
+              <button class="btn" type="button">
+                <img src="../assets/nav-bar-icons/search.svg" alt="Search">
               </button>
-              </form>
             </div>
           </div>
         </div>
@@ -124,13 +121,13 @@
    
   <!-- secondary nav bar start -->
 
-  <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #D4BEE4">
+  <nav class="navbar navbar-expand-lg mb-3" style="background-color: #D4BEE4">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto my-2 my-lg-0 navbar-nav-scroll">
+        <ul class="navbar-nav mx-auto my-2 my-lg-0 gap-3 navbar-nav-scroll">
           <li class="nav-item">
             <a class="nav-link" href="#home">Home</a>
           </li>
@@ -150,6 +147,7 @@
       </div>
     </div>
   </nav>
+  </div>
 
   <!-- secondary nav bar end -->
 
@@ -165,12 +163,3 @@
 
 </body>
 </html>
-
-<?php
-  if (isset($_GET['form-control'])) {
-    $Search= $_GET['form-control'];
-  }
-
-
-  
-?>

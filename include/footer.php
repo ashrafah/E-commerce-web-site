@@ -8,27 +8,27 @@
     <!-- Bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
+    <!-- custom css -->
+    <link rel="stylesheet" href="./footer-style.css">
+
     <style>
-
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-        *{
-            font-family: poppins ,sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .bg-light-purple{
-            background-color: #D4BEE4;
-        }
-        .bg-dark-purple{
-            background-color: #3b1e54;
-        }
-        .lead{
-            font-size: 12px;
-        }
-        .line-height{
-            line-height: 10px;
-        }
+      *{
+    font-family: poppins ,sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.bg-light-purple{
+    background-color: #D4BEE4;
+}
+.bg-dark-purple{
+    background-color: #3b1e54;
+}
+.lead{
+    font-size: 12px;
+}
+.line-height{
+    line-height: 10px;
+}
     </style>
 
 </head>
@@ -39,15 +39,14 @@
 
     <div class="bg-light-purple">
         <div class="container">
-            <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-2 my-5 border-top">
-              <div class="col mb-3 pt-1">
-                <!-- logo -->
+            <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+              <div class="col mb-3">
                 <img src="../assets/Footer/footer-icon.png" alt="Online Galaxy" style="height: 200px;">
                 <p class="text-body-secondary">© 2024</p>
               </div>
           
               <!-- Address start -->
-              <div class="col mb-2 pt-1">
+              <div class="col mb-3">
                 <h2 class="fw-bold fs-3">Online Galaxy</h2>
                 <h5>Got Question</h5>
                 <div class="lh-1 f">
@@ -63,7 +62,7 @@
 
 
               <!-- Custtomer care start -->
-              <div class="col mb-2 pt-1">
+              <div class="col mb-3">
                 <h5 class="text-decoration-underline lea">Customer Care</h5>
                 <ul class="nav flex-column">
                   <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Corporate Inquiry</a></li>
@@ -77,7 +76,7 @@
 
 
               <!-- get know start -->
-              <div class="col mb-2 pt-1">
+              <div class="col mb-3">
                 <h5 class="text-decoration-underline">Get Know to US</h5>
                 <ul class="nav flex-column">
                   <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About Us</a></li>
@@ -89,7 +88,7 @@
 
 
               <!-- let us heip start -->
-              <div class="col mb-2 pt-1">
+              <div class="col mb-3">
                 <h5 class="text-decoration-underline">Lets US  help YOU</h5>
                 <ul class="nav flex-column">
                   <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">My Account</a></li>
@@ -108,7 +107,7 @@
 
         <!-- copyright text start -->
 
-        <div class="d-flex flex-column flex-sm-row justify-content-center py-1 my-4 border-top bg-dark-purple">
+        <div class="d-flex flex-column flex-sm-row justify-content-center pt-4 mt-4 border-top bg-dark-purple">
             <p class="text-white">© 2024 Company, Inc. All rights reserved.</p>
         </div>
 
