@@ -1,3 +1,7 @@
+
+<!-- nav bar -->
+<?php include "include/nav.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +20,7 @@
     
     <!-- Accordion strat -->
 
-    <div class="accordion container mt-5" id="accordionExample">
+    <div class="accordion mt-5" id="accordionExample">
 
         <!--  -->
 
@@ -168,3 +172,6 @@
 
 </body>
 </html>
+
+<!-- footer -->
+<?php include "include/footer.php"; ?>

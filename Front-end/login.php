@@ -1,3 +1,6 @@
+<!-- nav bar -->
+<?php include "include/nav.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +19,7 @@
 
     <!-- log in form start -->
 
-      <div class="container login-container">
+      <div class="login-container">
         <div class="row mt-5">
           <!-- Login Form Section -->
           <div class="col-12 col-md-7 p-5">
@@ -33,7 +36,7 @@
               <div class="my-4 d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary w-50 rounded-4 ">Login</button>
               </div>
-              <p class="text-center">Don’t have an account? <a href="#" class="register-link text-decoration-none text-danger">Register</a></p>
+              <p class="text-center">Don’t have an account? <a href="./register.php" class="register-link text-decoration-none text-danger">Register</a></p>
             </form>
           </div>
     
@@ -50,3 +53,7 @@
     
 </body>
 </html>
+
+
+<!-- footer -->
+<?php include "include/footer.php"; ?>

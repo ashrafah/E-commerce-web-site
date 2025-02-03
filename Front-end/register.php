@@ -1,45 +1,10 @@
-<?php
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "shop";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    // Insert data into the database
-    $sql = "INSERT INTO `users` (`FirstName`, `LastName`, `MobileNo.`, `UserName`, `Email`, `Password`, `P.Address`, `P.Town`, `S.Address`, `S.Town`)
-            VALUES ('$firstName', '$lastName', '$mobileNo', '$username', '$email', '$password', '$permanentAddress', '$permanentTown', '$shippingAddress', '$shippingTown')";
-
-    if ($conn->query($sql) === TRUE) {
-        $successMessage = "User added successfully!";
-        $isSuccess = true;
-    } else {
-        $successMessage = "Error: " . $sql . "<br>" . $conn->error;
-        $isSuccess = false;
-    }
-
-    $conn->close();
-}
-?>
 
 
 
 
 
+<!-- nav bar -->
+<?php include "include/nav.php"; ?>
 
 
 
@@ -59,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 
-    <div class="container login-container">
+    <div class="login-container">
         <div class="row mt-5">
 
             <!-- logo section start -->
@@ -102,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <button type="submit" class="btn btn-primary w-50 rounded-4">Register</button>
                     </div>
                     <p class="text-center">
-                        Already have an account? <a href="#" class="login-link text-decoration-none">Login</a>
+                        Already have an account? <a href="./login.php" class="login-link text-decoration-none">Login</a>
                     </p>
                 </form>
             </div>
@@ -120,3 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
+
+
+<!-- footer -->
+<?php include "include/footer.php"; ?>

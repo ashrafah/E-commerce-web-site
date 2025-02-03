@@ -27,6 +27,9 @@ $sqlItems = "SELECT IID, Name, Price, OPrice, Image_1 FROM items WHERE CID = $ca
 $resultItems = $conn->query($sqlItems);
 ?>
 
+<!-- nav bar -->
+<?php include "include/nav.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,22 +52,18 @@ $resultItems = $conn->query($sqlItems);
             padding: 20px;
             box-sizing: border-box;
             overflow: hidden;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
         }
         .category-box {
-            width: 23%; /* width of each box */
+            display: inline-block;
+            width: 23%;
             margin: 10px;
             background: linear-gradient(to bottom, #9B7EBD, #3B1E54);
             border-radius: 10px;
+            padding: 10px;
             text-align: center;
             box-sizing: border-box;
             overflow: hidden;
             height: 350px; /* fixed height for the box */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
         .category-box img {
             width: 100%;
@@ -76,6 +75,10 @@ $resultItems = $conn->query($sqlItems);
             margin-top: 20px;
             font-weight: bold;
             color: #fff;
+        }
+        .price {
+            color: #fff;
+            margin-top: 10px;
             font-size: 1.2em;
         }
         @media screen and (max-width: 768px) {
@@ -102,10 +105,10 @@ $resultItems = $conn->query($sqlItems);
                 $itemName = $row['Name'];
                 $price = $row['Price'];
 
-                // Display the item inside a gradient rectangle
                 echo '<div class="category-box">';
                 echo '<img src="data:image/jpeg;base64,' . $image . '" alt="' . $itemName . '">';
                 echo '<div class="category-name">' . $itemName . '</div>';
+                echo '<div class="price">Price: $' . $price . '</div>';
                 echo '</div>';
             }
         } else {
@@ -115,6 +118,9 @@ $resultItems = $conn->query($sqlItems);
     </div>
 </body>
 </html>
+
+<!-- footer -->
+<?php include "include/footer.php"; ?>
 
 <?php
 $conn->close();

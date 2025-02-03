@@ -9,7 +9,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- custom css -->
-    <link rel="stylesheet" href="./css/footer-style.css">
+    <link rel="stylesheet" href="./footer-style.css">
+
+    <style>
+      *{
+    font-family: poppins ,sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.bg-light-purple{
+    background-color: #D4BEE4;
+}
+.bg-dark-purple{
+    background-color: #3b1e54;
+}
+.lead{
+    font-size: 12px;
+}
+.line-height{
+    line-height: 10px;
+}
+    </style>
 
 </head>
 <body class="">
@@ -21,7 +41,7 @@
         <div class="container">
             <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
               <div class="col mb-3">
-                <img src="../assets/Footer/footer-icon.png" alt="Online Galaxy" style="height: 200px;">  //logo
+                <img src="../assets/Footer/footer-icon.png" alt="Online Galaxy" style="height: 200px;">
                 <p class="text-body-secondary">© 2024</p>
               </div>
           
@@ -87,7 +107,7 @@
 
         <!-- copyright text start -->
 
-        <div class="d-flex flex-column flex-sm-row justify-content-center py-4 my-4 border-top bg-dark-purple">
+        <div class="d-flex flex-column flex-sm-row justify-content-center pt-4 mt-4 border-top bg-dark-purple">
             <p class="text-white">© 2024 Company, Inc. All rights reserved.</p>
         </div>
 

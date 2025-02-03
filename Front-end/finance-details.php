@@ -1,3 +1,6 @@
+<!-- nav bar -->
+<?php include "include/nav.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +17,7 @@
 </head>
 <body>
 
-    <div class="container login-container">
+    <div class="login-container">
         <div class="row mt-5">
 
             <!-- logo section start -->
@@ -74,3 +77,7 @@
 
 </body>
 </html>
+
+
+<!-- footer -->
+<?php include "include/footer.php"; ?>

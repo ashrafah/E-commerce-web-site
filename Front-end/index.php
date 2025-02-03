@@ -1,3 +1,6 @@
+<!-- nav bar -->
+<?php include "include/nav.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,3 +53,7 @@
 
 </body>
 </html>
+
+
+<!-- footer -->
+<?php include "include/footer.php"; ?>
